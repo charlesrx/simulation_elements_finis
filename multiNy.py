@@ -30,7 +30,6 @@ def gg(ux,uy,vx,vy):
 	return integrate(lam*(diff(ux,x)+diff(uy,y))*(diff(vx,x)+diff(vy,y))+mu*(diff(ux,x)*diff(vx,x)+diff(ux,x)*diff(vx,x)+diff(uy,x)*diff(vx,y)+diff(ux,y)*diff(vx,y)+diff(ux,y)*diff(vy,x)+diff(uy,x)*diff(vy,x)+diff(uy,y)*diff(vy,y)+diff(uy,y)*diff(vy,y)),(x,-1,1),(y,-1,1))
 
 
-#Question 2a
 def fl(vx,vy):
 	return Float(-8e4*1*vy.subs(x,1).subs(y,0))
 
