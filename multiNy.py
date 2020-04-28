@@ -105,11 +105,13 @@ for n in range(1,N*NN+1):
 
 
 #Le vecteur b représente le terme source de la forme faible
-#On ajoute le terme source aux bords droits en y
 b=np.zeros(2*(N+1)*(NN+1))
+
+#On ajoute le terme source aux bords droits en y
 # for i in range(1,NN+2):
 # 	b[(N+1)*(NN+1)+(N+1)*i-1]=-8e4*N/2
 
+#On ajoute une force verticale de 8e4*N Newton vers le bas au supérieur droit.
 b[(N+1)*(NN+1)+N+1-1]=-8e4*N
 
 #On veut maintenant imposer des conditions de dirichlet au côté gauche
