@@ -92,9 +92,6 @@ for n in range(1,N*NN+1):
 	l2c[n-1,8-1]=n+N+nl(n+N)-1+(N+1)*(NN+1)
 
 
-
-# l2c=np.array([[2,5,1,6,8,11,7,12],[3,4,2,5,9,10,8,11]])
-
 #On remplit la matrice en balayant les éléments et en réarrangeant les termes de la matrice M à chaque noeud
 #Les éléments ont une longueur 2/NN selon y et 2 selon x, il faut donc multiplier les termes de la matrice par 2/NN
 for n in range(1,N*NN+1):
@@ -118,7 +115,6 @@ b[(N+1)*(NN+1)+N+1-1]=-8e4*N
 #Comme les conditions imposée au bord sont nulles il n'y a pas besoin de retrancher les termes dans les autres lignes
 #Supprimer les valeurs des lignes correspondants aux points gauches
 
-
 for i in range(1,NN+2):
 	#pour x
 	K[1+(i-1)*(N+1)-1,:]=np.zeros(2*(N+1)*(NN+1))
@@ -127,16 +123,6 @@ for i in range(1,NN+2):
 	K[(N+1)*(NN+1)+1+(i-1)*(N+1)-1,:]=np.zeros(2*(N+1)*(NN+1))
 	K[(N+1)*(NN+1)+1+(i-1)*(N+1)-1,(N+1)*(NN+1)+1+(i-1)*(N+1)-1]=1
 
-
-# workbook = xlsxwriter.Workbook('arrays.xlsx')
-# worksheet = workbook.add_worksheet()
-
-# row = 0
-
-# for col, data in enumerate(np.transpose(K)):
-#     worksheet.write_column(row, col, data)
-
-# workbook.close()	
 
 # Il faut maintenant résoudre le système d'équations M.u=b pour obtenir le résultat
 u=solve(K,b)
