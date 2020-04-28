@@ -16,7 +16,7 @@ E=1.18e11
 L=20
 
 #Le moment quadratique I de la section S par rapport à l'axe Ox est 
-I=10
+I=20
 
 #Le faisceau a une longueur de 20 mètres
 beam = Beam(L, E, I)
@@ -57,7 +57,8 @@ beam.plot_deflection()
 exec(open('./multiNy.py').read())
 
 
-xm=np.linspace(0,20,100)
+xm=np.linspace(0,2*N,N+1)
+
 ym=np.zeros(len(xm))
 cpt=0
 for i in xm:
@@ -65,9 +66,10 @@ for i in xm:
 	cpt+=1
 
 
-plt.plot(xm,fff(xm,np.zeros(len(xm))))
+plt.plot(xm,0.5*uy[int(ligne1),:]+0.5*uy[int(ligne2),:])
 plt.plot(xm,ym)
 plt.title('Comparaison entre la solution calculée et celle de sympy.continuum_mechanics')
 plt.show()
+
 
 

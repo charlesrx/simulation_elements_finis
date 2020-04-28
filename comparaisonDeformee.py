@@ -20,7 +20,7 @@ E=1.18e11
 #Le moment quadratique I de la section S par rapport
 # à l'axe Ox de la poutre est :
 #I=integrate(y**2,(x,0,L),(y,-1,1))
-I=10
+I=20
 
 
 #L'équation de la déformée est 
@@ -33,12 +33,22 @@ de=lambdify([x],expr)
 
 #Comparaison avec la simulation numérique-------------------------
 exec(open('./multiNy.py').read())
-xm=np.linspace(0,20,100)
+xm=np.linspace(0,2*N,N+1)
 
-plt.plot(xm,fff(xm,np.zeros(len(xm))))
+if int(NN/2)==NN/2:
+	ligne1=NN/2+1
+	ligne2=NN/2+1
+else:
+	ligne1=int(NN/2)
+	ligne2=int(NN/2)+1
+
+
+plt.plot(xm,0.5*uy[int(ligne1),:]+0.5*uy[int(ligne2),:])
 plt.plot(xm,de(xm))
 plt.title('Comparaison entre la solution numérique et la déformée')
 plt.show()
+
+
 
 
 
