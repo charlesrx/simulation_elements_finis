@@ -1,22 +1,18 @@
-#Les packages------------------------------------------------------------
-from sympy import *
-init_printing(use_unicode=True)
-import numpy as np
-from numpy.linalg import solve
-import matplotlib.pyplot as plt
+
 
 
 #Déclaration des variables et fonctions symboliques------------------------------------------------------------
 x,y,lam,mu=symbols('x,y,lam,mu')
-E=1.18e11
-nu=0.31
+#E=1.18e11
+#nu=0.31
 lam=E*nu/(1+nu)/(1-2*nu)
 mu=E/2/(1+nu)
 #Nombre d'éléments horizontaux
-N=10
+#N=10
 #Nombre d'éléments verticaux
-NN=6
+#NN=6
 a=1/NN
+
 
 #Les fonctions------------------------------------------------------------
 
@@ -28,13 +24,23 @@ g4=(1-x)*(1-y)/4
 def gg(ux,uy,vx,vy):
 	return integrate(lam*(diff(ux,x)+diff(uy,y))*(diff(vx,x)+diff(vy,y))+mu*(diff(ux,x)*diff(vx,x)+diff(ux,x)*diff(vx,x)+diff(uy,x)*diff(vx,y)+diff(ux,y)*diff(vx,y)+diff(ux,y)*diff(vy,x)+diff(uy,x)*diff(vy,x)+diff(uy,y)*diff(vy,y)+diff(uy,y)*diff(vy,y)),(x,-1,1),(y,-1,1))
 
-
 def fl(vx,vy):
 	return Float(-8e4*1*vy.subs(x,1).subs(y,0))
 
 def nl(n):
 	return floor((n-1)/N)+1
-	
+
+def AfficherDeplacements():
+	#Faire le tracé du champ de déplacements
+	plt.quiver(X,Y,ux,uy)
+	plt.show()
+
+def AfficherContour():
+	plt.plot(xx,yy)
+	plt.plot(xx+500*uxx,yy+500*uyy)
+	plt.gca().set_aspect('equal', adjustable='box')
+	plt.show()
+
 
 #Le code------------------------------------------------------------
 
@@ -71,9 +77,9 @@ for m in range(1,9):
 M=np.array(M).astype(np.float64)
 
 
-
 #On a (N+1)*(NN+1) points il faut donc une matrice globale de 2*(N+1)*(NN+1) lignes, idem pour b
 K=np.zeros((2*(N+1)*(NN+1),2*(N+1)*(NN+1)))
+
 
 #On créée une matrice locale vers globale
 l2c=np.zeros((N*NN,8))
@@ -126,17 +132,13 @@ for i in range(1,NN+2):
 
 # Il faut maintenant résoudre le système d'équations M.u=b pour obtenir le résultat
 u=solve(K,b)
+
+#Préparer les données pour les tracés
 ux=np.reshape(u[0:(N+1)*(NN+1)],(NN+1,N+1))
 uy=np.reshape(u[(N+1)*(NN+1):],(NN+1,N+1))
-
-
-#Faire le tracé du champ de déplacements
 X,Y=np.meshgrid(np.linspace(0,2*N,N+1),np.linspace(1,-1,NN+1))
-plt.quiver(X,Y,ux,uy)
-plt.show()
 
-
-#Faire le tracé de l'ancien et du nouveau profil
+#Préparer les données pour faire le tracé de l'ancien et du nouveau profil
 xx=np.empty(0)
 yy=np.empty(0)
 uxx=np.empty(0)
@@ -166,10 +168,7 @@ for i in range(NN,-1,-1):
 	uxx=np.append(uxx,ux[i,0])
 	uyy=np.append(uyy,uy[i,0])
 
-plt.plot(xx,yy)
-plt.plot(xx+500*uxx,yy+500*uyy)
-plt.gca().set_aspect('equal', adjustable='box')
-plt.show()
+
 
 
 

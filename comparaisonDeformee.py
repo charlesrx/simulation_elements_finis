@@ -1,6 +1,3 @@
-from sympy import *
-init_printing(use_unicode=True, wrap_line=False)
-
 x,y=symbols('x,y')
 
 
@@ -17,11 +14,8 @@ E=1.18e11
 #--------------------------------------------------------------
 
 
-#Le moment quadratique I de la section S par rapport
-# à l'axe Ox de la poutre est :
-#I=integrate(y**2,(x,0,L),(y,-1,1))
+#Le moment quadratique I :
 I=20
-
 
 #L'équation de la déformée est 
 expr=-(3*L-x)*P*x**2/(6*E*I)
@@ -32,7 +26,7 @@ de=lambdify([x],expr)
 #plot(expr,(x,0,20))
 
 #Comparaison avec la simulation numérique-------------------------
-exec(open('./multiNy.py').read())
+#exec(open('./multiNy.py').read())
 xm=np.linspace(0,2*N,N+1)
 
 if int(NN/2)==NN/2:

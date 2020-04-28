@@ -1,11 +1,10 @@
 #Le but de ce code est de vérifier la validité de la simulation numérique
 #Pour cela on va comparer une solution connue du problème de déflexion avec la solution calculée numériquement
 
-from sympy import *
-init_printing(use_unicode=True, wrap_line=False)
+
 from sympy.physics.continuum_mechanics.beam import Beam
 
-E, I = symbols('E, I')
+
 x,y=symbols('x,y')
 
 
@@ -24,7 +23,7 @@ beam = Beam(L, E, I)
 
 #On applique une force de 8e4*N Newton à la barre au coin supérieur droit
 #Dans notre cas N=10
-N=10
+
 beam.apply_load(-8e4*N,20,-1)
 #Le terme -1 
 
@@ -52,9 +51,7 @@ beam.solve_for_reaction_loads(R, M)
 beam.reaction_loads
 
 
-beam.plot_deflection()
-
-exec(open('./multiNy.py').read())
+#beam.plot_deflection()
 
 
 xm=np.linspace(0,2*N,N+1)
