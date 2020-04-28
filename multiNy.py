@@ -4,7 +4,6 @@ init_printing(use_unicode=True)
 import numpy as np
 from numpy.linalg import solve
 import matplotlib.pyplot as plt
-import xlsxwriter
 
 
 #Déclaration des variables et fonctions symboliques------------------------------------------------------------
@@ -124,44 +123,53 @@ for i in range(1,NN+2):
 	K[(N+1)*(NN+1)+1+(i-1)*(N+1)-1,(N+1)*(NN+1)+1+(i-1)*(N+1)-1]=1
 
 
+
 # Il faut maintenant résoudre le système d'équations M.u=b pour obtenir le résultat
 u=solve(K,b)
-ux=0*x
-uy=0*y
-
-g1=(1+x)*(1+y)/4*Piecewise((1,-1<=x),(0,True))*Piecewise((1,x<=1),(0,True))*Piecewise((1,-1<=y),(0,True))*Piecewise((1,y<=1),(0,True))
-g2=(1+x)*(1-y)/4*Piecewise((1,-1<=x),(0,True))*Piecewise((1,x<=1),(0,True))*Piecewise((1,-1<=y),(0,True))*Piecewise((1,y<=1),(0,True))
-g3=(1-x)*(1+y)/4*Piecewise((1,-1<=x),(0,True))*Piecewise((1,x<=1),(0,True))*Piecewise((1,-1<=y),(0,True))*Piecewise((1,y<=1),(0,True))
-g4=(1-x)*(1-y)/4*Piecewise((1,-1<=x),(0,True))*Piecewise((1,x<=1),(0,True))*Piecewise((1,-1<=y),(0,True))*Piecewise((1,y<=1),(0,True))
-
-liste=[]
-liste.append(g1)
-liste.append(g2)
-liste.append(g3)
-liste.append(g4)
-
-for n in range(1,N*NN+1):
-	for i in range(1,5):
-		ux+=u[int(l2c[n-1,i-1]-1)]*liste[i-1].subs(x,x-((n-1)*2+1-2*N*(nl(n)-1))).subs(y,(y-(1-a-2*a*(nl(n)-1)))/a)
-		uy+=u[int(l2c[n-1,i-1+4]-1)]*liste[i-1].subs(x,x-((n-1)*2+1-2*N*(nl(n)-1))).subs(y,(y-(1-a-2*a*(nl(n)-1)))/a)
+ux=np.reshape(u[0:(N+1)*(NN+1)],(NN+1,N+1))
+uy=np.reshape(u[(N+1)*(NN+1):],(NN+1,N+1))
 
 
-
-fff=lambdify([x,y],uy)
-fffx=lambdify([x,y],ux)
-
-
-X,Y = np.meshgrid(np.linspace(0,2*N,100),np.linspace(-1,1,10))
-uxx = fffx(X,Y)
-uyy = fff(X,Y)
-
-plt.quiver(X,Y,uxx,uyy)
+#Faire le tracé du champ de déplacements
+X,Y=np.meshgrid(np.linspace(0,2*N,N+1),np.linspace(1,-1,NN+1))
+plt.quiver(X,Y,ux,uy)
 plt.show()
 
-xxx=np.concatenate((np.linspace(0,2*N,100),np.ones(100)*2*N,np.linspace(2*N,0,100),np.zeros(100)))
-yyy=np.concatenate((-np.ones(100),np.linspace(-1,1,100),np.ones(100),np.linspace(1,-1,100)))
 
-plt.plot(xxx,yyy)
-plt.plot(xxx+500*fffx(xxx,yyy),yyy+500*fff(xxx,yyy))
+#Faire le tracé de l'ancien et du nouveau profil
+xx=np.empty(0)
+yy=np.empty(0)
+uxx=np.empty(0)
+uyy=np.empty(0)
+
+for i in range(0,N+1):
+	xx=np.append(xx,X[0,i])
+	yy=np.append(yy,Y[0,i])
+	uxx=np.append(uxx,ux[0,i])
+	uyy=np.append(uyy,uy[0,i])
+
+for i in range(0,NN+1):
+	xx=np.append(xx,X[i,N])
+	yy=np.append(yy,Y[i,N])
+	uxx=np.append(uxx,ux[i,N])
+	uyy=np.append(uyy,uy[i,N])
+
+for i in range(N,-1,-1):
+	xx=np.append(xx,X[NN,i])
+	yy=np.append(yy,Y[NN,i])
+	uxx=np.append(uxx,ux[NN,i])
+	uyy=np.append(uyy,uy[NN,i])
+
+for i in range(NN,-1,-1):
+	xx=np.append(xx,X[i,0])
+	yy=np.append(yy,Y[i,0])
+	uxx=np.append(uxx,ux[i,0])
+	uyy=np.append(uyy,uy[i,0])
+
+plt.plot(xx,yy)
+plt.plot(xx+500*uxx,yy+500*uyy)
 plt.gca().set_aspect('equal', adjustable='box')
 plt.show()
+
+
+
