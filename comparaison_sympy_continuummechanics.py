@@ -16,7 +16,7 @@ E=1.18e11
 L=20
 
 #Le moment quadratique I de la section S par rapport à l'axe Ox est 
-I=integrate(y**2,(x,0,L),(y,-1,1))
+I=10
 
 #Le faisceau a une longueur de 20 mètres
 beam = Beam(L, E, I)
