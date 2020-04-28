@@ -11,7 +11,8 @@ L=2*N
 
 
 #Le moment quadratique I :
-I=13.333
+#Quel moment quadratique utiliser avec une section plane sans épaisseur ?
+I=20
 
 #L'équation de la déformée est 
 expr=-(3*L-x)*P*x**2/(6*E*I)

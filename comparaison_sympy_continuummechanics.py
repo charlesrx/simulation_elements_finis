@@ -15,6 +15,7 @@ E=1.18e11
 L=2*N
 
 #Le moment quadratique I de la section S par rapport à l'axe Ox est 
+#??? Quel moment quadratique utiliser avec une section plane sans épaisseur ????
 I=20
 
 #Le faisceau a une longueur de 20 mètres
