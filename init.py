@@ -30,11 +30,5 @@ AfficherDeplacements()
 AfficherContour()
 
 
-#Comparer le résultat avec la déformée calculée
-exec(open('./comparaisonDeformee.py').read())
-
-
-#Comparer le résultat avec la déformée calculée à l'aide de sympy continuum mechanics
-exec(open('./comparaison_sympy_continuummechanics.py').read())
 
 
