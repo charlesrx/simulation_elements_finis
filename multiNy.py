@@ -73,7 +73,7 @@ M=np.array(M).astype(np.float64)
 
 
 
-#On a (N+1)*(NN+1) points il faut donc une matrice de 2*(N+1)*(NN+1) lignes, idem pour b
+#On a (N+1)*(NN+1) points il faut donc une matrice globale de 2*(N+1)*(NN+1) lignes, idem pour b
 K=np.zeros((2*(N+1)*(NN+1),2*(N+1)*(NN+1)))
 
 #On créée une matrice locale vers globale
