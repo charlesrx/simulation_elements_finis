@@ -12,7 +12,7 @@ x,y=symbols('x,y')
 E=1.18e11
 
 #Le faisceau métallique à une longueur L de 20 mètres et une section de longueur 2
-L=20
+L=2*N
 
 #Le moment quadratique I de la section S par rapport à l'axe Ox est 
 I=20

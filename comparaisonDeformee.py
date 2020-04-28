@@ -3,19 +3,15 @@ x,y=symbols('x,y')
 
 #Données du problème ------------------------------------------
 #La force P est en N :
-N=10
 P=8e4*N
 
 #La longueur de la poutre est 20
-L=20
-
-#Le module d'Young :
-E=1.18e11
+L=2*N
 #--------------------------------------------------------------
 
 
 #Le moment quadratique I :
-I=20
+I=13.333
 
 #L'équation de la déformée est 
 expr=-(3*L-x)*P*x**2/(6*E*I)
