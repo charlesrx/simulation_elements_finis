@@ -12,11 +12,13 @@ E=1.18e11
 nu=0.31
 
 #Paramètres de simulation-------------------------------------------------
-#Nombre d'éléments horizontaux chaque élément à une longueur horizontale de 2
+#Nombre d'éléments horizontaux
 N=10
-#Nombre d'éléments verticaux, la poutre a une hauteur de 2 divisée par le nombre d'éléments
+#Nombre d'éléments verticaux
 NN=6
 
+horizontale=10
+verticale=2
 #--------------------------------------------------------------------------------------------------
 
 #Faire les calculs avec ces paramètres - remarque la force appliquée à la poutre

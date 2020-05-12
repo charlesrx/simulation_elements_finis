@@ -3,15 +3,12 @@
 
 #Déclaration des variables et fonctions symboliques------------------------------------------------------------
 x,y,lam,mu=symbols('x,y,lam,mu')
-#E=1.18e11
-#nu=0.31
+
 lam=E*nu/(1+nu)/(1-2*nu)
 mu=E/2/(1+nu)
-#Nombre d'éléments horizontaux
-#N=10
-#Nombre d'éléments verticaux
-#NN=6
-a=1/NN
+
+a=verticale/NN/2
+f=horizontale/N/2
 
 
 #Les fonctions------------------------------------------------------------
@@ -98,11 +95,11 @@ for n in range(1,N*NN+1):
 
 
 #On remplit la matrice en balayant les éléments et en réarrangeant les termes de la matrice M à chaque noeud
-#Les éléments ont une longueur 2/NN selon y et 2 selon x, il faut donc multiplier les termes de la matrice par 2/NN
+#Il faut aussi prendre en compte le fait que les intégrales sont calculés sur des éléments finis de largeur et hauteur 2, après changement de variable il faut multiplier par les termes a et f.
 for n in range(1,N*NN+1):
 	for i in range(1,9):
 		for j in range(1,9):
-			K[int(l2c[n-1,i-1]-1),int(l2c[n-1,j-1]-1)]+=a*M[i-1,j-1]
+			K[int(l2c[n-1,i-1]-1),int(l2c[n-1,j-1]-1)]+=a*f*M[i-1,j-1]
 
 
 
@@ -113,7 +110,7 @@ b=np.zeros(2*(N+1)*(NN+1))
 # for i in range(1,NN+2):
 # 	b[(N+1)*(NN+1)+(N+1)*i-1]=-8e4*N/2
 
-#On ajoute une force verticale de 8e4*N Newton vers le bas au supérieur droit.
+#On ajoute une force verticale de 8e4*N Newton vers le bas au coin supérieur droit.
 b[(N+1)*(NN+1)+N+1-1]=-8e4*N
 
 #On veut maintenant imposer des conditions de dirichlet au côté gauche
@@ -136,7 +133,7 @@ u=solve(K,b)
 #Préparer les données pour les tracés
 ux=np.reshape(u[0:(N+1)*(NN+1)],(NN+1,N+1))
 uy=np.reshape(u[(N+1)*(NN+1):],(NN+1,N+1))
-X,Y=np.meshgrid(np.linspace(0,2*N,N+1),np.linspace(1,-1,NN+1))
+X,Y=np.meshgrid(np.linspace(0,horizontale,N+1),np.linspace(verticale/2,-verticale/2,NN+1))
 
 #Préparer les données pour faire le tracé de l'ancien et du nouveau profil
 xx=np.empty(0)
