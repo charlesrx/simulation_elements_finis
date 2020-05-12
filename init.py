@@ -13,13 +13,17 @@ nu=0.31
 
 #Paramètres de simulation-------------------------------------------------
 #Nombre d'éléments horizontaux pour le calcul
-N=10
+N=16
 #Nombre d'éléments verticaux pour le calcul
 NN=6
 
 #Longueurs horizontale et verticale de la poutre
 horizontale=10
-verticale=2
+verticale=3
+
+#Facteur d'exagération de la déformation pour le tracé final
+exag=500
+
 #--------------------------------------------------------------------------------------------------
 
 #Faire les calculs avec ces paramètres - remarque la force appliquée à la poutre

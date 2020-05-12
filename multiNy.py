@@ -21,8 +21,6 @@ g4=(1-x)*(1-y)/4
 def gg(ux,uy,vx,vy):
 	return integrate(lam*(diff(ux,x)+diff(uy,y))*(diff(vx,x)+diff(vy,y))+mu*(diff(ux,x)*diff(vx,x)+diff(ux,x)*diff(vx,x)+diff(uy,x)*diff(vx,y)+diff(ux,y)*diff(vx,y)+diff(ux,y)*diff(vy,x)+diff(uy,x)*diff(vy,x)+diff(uy,y)*diff(vy,y)+diff(uy,y)*diff(vy,y)),(x,-1,1),(y,-1,1))
 
-def fl(vx,vy):
-	return Float(-8e4*1*vy.subs(x,1).subs(y,0))
 
 def nl(n):
 	return floor((n-1)/N)+1
@@ -30,12 +28,14 @@ def nl(n):
 def AfficherDeplacements():
 	#Faire le tracé du champ de déplacements
 	plt.quiver(X,Y,ux,uy)
+	plt.title('déplacements au sein de la poutre')
 	plt.show()
 
 def AfficherContour():
 	plt.plot(xx,yy)
-	plt.plot(xx+500*uxx,yy+500*uyy)
+	plt.plot(xx+exag*uxx,yy+exag*uyy)
 	plt.gca().set_aspect('equal', adjustable='box')
+	plt.title('Déformation de la poutre exagérée par un facteur :'+ str(exag) )
 	plt.show()
 
 
@@ -110,8 +110,8 @@ b=np.zeros(2*(N+1)*(NN+1))
 # for i in range(1,NN+2):
 # 	b[(N+1)*(NN+1)+(N+1)*i-1]=-8e4*N/2
 
-#On ajoute une force verticale de 8e4*N Newton vers le bas au coin supérieur droit.
-b[(N+1)*(NN+1)+N+1-1]=-8e4*N
+#On ajoute une force verticale de 4e4*horizontal Newton vers le bas au coin supérieur droit.
+b[(N+1)*(NN+1)+N+1-1]=-4e4*horizontale
 
 #On veut maintenant imposer des conditions de dirichlet au côté gauche
 #Comme les conditions imposée au bord sont nulles il n'y a pas besoin de retrancher les termes dans les autres lignes
