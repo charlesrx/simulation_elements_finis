@@ -17,9 +17,9 @@ N=16
 #Nombre d'éléments verticaux pour le calcul
 NN=6
 
-#Longueurs horizontale et verticale de la poutre
-horizontale=10
-verticale=3
+#Longueurs horizontale L (longueur) et verticale H (hauteur) de la poutre
+L=10
+H=3
 
 #Facteur d'exagération de la déformation pour le tracé final
 exag=500

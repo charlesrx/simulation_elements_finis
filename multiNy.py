@@ -7,8 +7,8 @@ x,y,lam,mu=symbols('x,y,lam,mu')
 lam=E*nu/(1+nu)/(1-2*nu)
 mu=E/2/(1+nu)
 
-a=verticale/NN/2
-f=horizontale/N/2
+h=H/NN/2
+l=L/N/2
 
 
 #Les fonctions------------------------------------------------------------
@@ -67,15 +67,15 @@ listeY.append(g2)
 listeY.append(g3)
 listeY.append(g4)
 
-#M est la matrice qui représente la partie bilinéaire de la formulation faible
-M=zeros(8,8)
+#A est la matrice qui représente la partie bilinéaire de la formulation faible
+A=zeros(8,8)
 for m in range(1,9):
 	for n in range(1,9):
-		M[m-1,n-1]=gg(listeX[m-1],listeY[m-1],listeX[n-1],listeY[n-1])
+		A[m-1,n-1]=gg(listeX[m-1],listeY[m-1],listeX[n-1],listeY[n-1])
 
-#print(M)
+#print(A)
 #On convertit la matrice de valeurs symboliques vers float
-M=np.array(M).astype(np.float64)
+A=np.array(A).astype(np.float64)
 
 
 #On a (N+1)*(NN+1) points il faut donc une matrice globale de 2*(N+1)*(NN+1) lignes, idem pour b
@@ -98,13 +98,13 @@ for n in range(1,N*NN+1):
 	l2c[n-1,8-1]=n+N+nl(n+N)-1+(N+1)*(NN+1)
 
 
-#On remplit la matrice en balayant les éléments et en réarrangeant les termes de la matrice M à chaque noeud
-#Il faut aussi prendre en compte le fait que les intégrales sont calculés sur des éléments finis de largeur et hauteur 2, après changement de variable il faut multiplier par les termes a et f.
+#On remplit la matrice en balayant les éléments et en réarrangeant les termes de la matrice A à chaque noeud
+#Il faut aussi prendre en compte le fait que les intégrales sont calculés sur des éléments finis de largeur et hauteur 2, après changement de variable il faut multiplier par les termes h et l.
 for n in range(1,N*NN+1):
 	for i in range(1,9):
 		for j in range(1,9):
 			K[int(l2c[n-1,i-1]-1),\
-			int(l2c[n-1,j-1]-1)]+=a*f*M[i-1,j-1]
+			int(l2c[n-1,j-1]-1)]+=h*l*A[i-1,j-1]
 
 
 
@@ -116,7 +116,7 @@ b=np.zeros(2*(N+1)*(NN+1))
 # 	b[(N+1)*(NN+1)+(N+1)*i-1]=-8e4*N/2
 
 #On ajoute une force verticale de 4e4*horizontal Newton vers le bas au coin supérieur droit.
-b[(N+1)*(NN+1)+N+1-1]=-4e4*horizontale
+b[(N+1)*(NN+1)+N+1-1]=-4e4*L
 
 #On veut maintenant imposer des conditions de dirichlet au côté gauche
 #Comme les conditions imposée au bord sont nulles il n'y a pas besoin de retrancher les termes dans les autres lignes
@@ -132,13 +132,13 @@ for i in range(1,NN+2):
 
 
 
-# Il faut maintenant résoudre le système d'équations M.u=b pour obtenir le résultat
+# Il faut maintenant résoudre le système d'équations A.u=b pour obtenir le résultat
 u=solve(K,b)
 
 #Préparer les données pour les tracés
 ux=np.reshape(u[0:(N+1)*(NN+1)],(NN+1,N+1))
 uy=np.reshape(u[(N+1)*(NN+1):],(NN+1,N+1))
-X,Y=np.meshgrid(np.linspace(0,horizontale,N+1),np.linspace(verticale/2,-verticale/2,NN+1))
+X,Y=np.meshgrid(np.linspace(0,L,N+1),np.linspace(H/2,-H/2,NN+1))
 
 #Préparer les données pour faire le tracé de l'ancien et du nouveau profil
 xx=np.empty(0)
