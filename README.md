@@ -8,6 +8,10 @@ Pour commencer :
 
 Le fichier documentation.pdf présente la démarche suivie, ainsi que des exemples de calcul.
 
+L'image ci-dessous présente la déformation d'une poutre sous l'action d'une force verticale appliquée au coin supérieur droit. Paramètres de simulation : 
+- E=1.18e11
+- nu=0.31
+- Nombre d'éléments horizontaux pour le calcul : N=16
+- Nombre d'éléments verticaux pour le calcul : NN=6
+- Longueurs horizontale L (longueur) et verticale H (hauteur) de la poutre :L=10 et H=3
 ![](poutreF.png)
-*Déformation d'une poutre sous l'action d'une force verticale appliquée au coin supérieur droit. Paramètres de simulation : *
-
