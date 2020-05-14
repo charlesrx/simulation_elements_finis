@@ -8,7 +8,6 @@ Pour commencer :
 
 Le fichier documentation.pdf présente la démarche suivie, ainsi que des exemples de calcul.
 
-![Déformation d'une poutre sous l'action d'une force verticale appliquée au coin supérieur droit. Paramètres de simulation : ](poutreF.png)
-
-
+![](poutreF.png)
+*Déformation d'une poutre sous l'action d'une force verticale appliquée au coin supérieur droit. Paramètres de simulation : *
 
