@@ -8,7 +8,7 @@ Pour commencer :
 
 Le fichier documentation.pdf présente la démarche suivie, ainsi que des exemples de calcul.
 
-
+!(poutreF.pdf)
 
 
 
