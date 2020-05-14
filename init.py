@@ -24,6 +24,7 @@ H=3
 #Facteur d'exagération de la déformation pour le tracé final
 exag=500
 
+
 #--------------------------------------------------------------------------------------------------
 
 #Faire les calculs avec ces paramètres - La commande exec(open().read) permet
