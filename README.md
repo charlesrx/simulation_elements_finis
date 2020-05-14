@@ -16,4 +16,4 @@ L'image ci-dessous présente la déformation d'une poutre sous l'action d'une fo
 - Longueurs horizontale L (longueur) et verticale H (hauteur) de la poutre :L=10 et H=3
 - Force de 4e4 * L = 4e5 N.
 ![](poutreF.png)
-En bleu est représenté la position initiale de la poutre. En orange, la déformation après application de la force.
+<br/>En bleu est représenté la position initiale de la poutre. En orange, la déformation après application de la force.
