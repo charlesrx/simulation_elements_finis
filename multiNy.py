@@ -19,7 +19,11 @@ g3=(1-x)*(1+y)/4
 g4=(1-x)*(1-y)/4
 
 def gg(ux,uy,vx,vy):
-	return integrate(lam*(diff(ux,x)+diff(uy,y))*(diff(vx,x)+diff(vy,y))+mu*(diff(ux,x)*diff(vx,x)+diff(ux,x)*diff(vx,x)+diff(uy,x)*diff(vx,y)+diff(ux,y)*diff(vx,y)+diff(ux,y)*diff(vy,x)+diff(uy,x)*diff(vy,x)+diff(uy,y)*diff(vy,y)+diff(uy,y)*diff(vy,y)),(x,-1,1),(y,-1,1))
+	return integrate(lam*(diff(ux,x)+diff(uy,y))*(diff(vx,x)\
+		+diff(vy,y))+mu*(diff(ux,x)*diff(vx,x)+diff(ux,x)*diff(vx,x)\
+		+diff(uy,x)*diff(vx,y)+diff(ux,y)*diff(vx,y)+diff(ux,y)*diff(vy,x)\
+		+diff(uy,x)*diff(vy,x)+diff(uy,y)*diff(vy,y)+diff(uy,y)*diff(vy,y))\
+		,(x,-1,1),(y,-1,1))
 
 
 def nl(n):
@@ -99,7 +103,8 @@ for n in range(1,N*NN+1):
 for n in range(1,N*NN+1):
 	for i in range(1,9):
 		for j in range(1,9):
-			K[int(l2c[n-1,i-1]-1),int(l2c[n-1,j-1]-1)]+=a*f*M[i-1,j-1]
+			K[int(l2c[n-1,i-1]-1),\
+			int(l2c[n-1,j-1]-1)]+=a*f*M[i-1,j-1]
 
 
 
