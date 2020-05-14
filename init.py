@@ -26,8 +26,9 @@ exag=500
 
 #--------------------------------------------------------------------------------------------------
 
-#Faire les calculs avec ces paramètres - remarque la force appliquée à la poutre
-#est définie dans ce code via le vecteur b
+#Faire les calculs avec ces paramètres - La commande exec(open().read) permet
+#d'executer le code écrit dans 'multiNy.py'. Remarque la force appliquée à la 
+#poutre est définie dans le fichier multiNy via le vecteur b.
 exec(open('./multiNy.py').read())
 
 #Afficher les vecteurs déplacement

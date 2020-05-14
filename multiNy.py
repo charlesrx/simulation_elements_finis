@@ -78,7 +78,8 @@ for m in range(1,9):
 A=np.array(A).astype(np.float64)
 
 
-#On a (N+1)*(NN+1) points il faut donc une matrice globale de 2*(N+1)*(NN+1) lignes, idem pour b
+#On a (N+1)*(NN+1) points il faut donc une matrice globale de 2*(N+1)*(NN+1)
+# lignes, idem pour b
 K=np.zeros((2*(N+1)*(NN+1),2*(N+1)*(NN+1)))
 
 
@@ -98,8 +99,11 @@ for n in range(1,N*NN+1):
 	l2c[n-1,8-1]=n+N+nl(n+N)-1+(N+1)*(NN+1)
 
 
-#On remplit la matrice en balayant les éléments et en réarrangeant les termes de la matrice A à chaque noeud
-#Il faut aussi prendre en compte le fait que les intégrales sont calculés sur des éléments finis de largeur et hauteur 2, après changement de variable il faut multiplier par les termes h et l.
+#On remplit la matrice en balayant les éléments et en réarrangeant 
+#les termes de la matrice A à chaque noeud. Il faut aussi prendre 
+#en compte le fait que les intégrales sont calculés sur des éléments 
+#finis de largeur et hauteur 2, après changement de variable il faut 
+#multiplier par les termes h et l.
 for n in range(1,N*NN+1):
 	for i in range(1,9):
 		for j in range(1,9):
@@ -115,11 +119,13 @@ b=np.zeros(2*(N+1)*(NN+1))
 # for i in range(1,NN+2):
 # 	b[(N+1)*(NN+1)+(N+1)*i-1]=-8e4*N/2
 
-#On ajoute une force verticale de 4e4*horizontal Newton vers le bas au coin supérieur droit.
+#On ajoute une force verticale de 4e4*horizontal Newton vers le bas 
+#au coin supérieur droit.
 b[(N+1)*(NN+1)+N+1-1]=-4e4*L
 
 #On veut maintenant imposer des conditions de dirichlet au côté gauche
-#Comme les conditions imposée au bord sont nulles il n'y a pas besoin de retrancher les termes dans les autres lignes
+#Comme les conditions imposée au bord sont nulles il n'y a pas besoin de
+# retrancher les termes dans les autres lignes. 
 #Supprimer les valeurs des lignes correspondants aux points gauches
 
 for i in range(1,NN+2):
@@ -132,7 +138,8 @@ for i in range(1,NN+2):
 
 
 
-# Il faut maintenant résoudre le système d'équations A.u=b pour obtenir le résultat
+# Il faut maintenant résoudre le système d'équations A.u=b pour obtenir
+# le résultat
 u=solve(K,b)
 
 #Préparer les données pour les tracés
