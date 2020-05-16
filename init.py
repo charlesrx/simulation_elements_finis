@@ -13,9 +13,9 @@ nu=0.31
 
 #Paramètres de simulation-------------------------------------------------
 #Nombre d'éléments horizontaux pour le calcul
-N=30
+N=16
 #Nombre d'éléments verticaux pour le calcul
-NN=20
+NN=6
 
 #Longueurs horizontale L (longueur) et verticale H (hauteur) de la poutre
 L=10
