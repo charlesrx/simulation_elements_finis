@@ -7,7 +7,9 @@ Prérequis :
 Pour commencer :
 - Télécharger tous les fichiers dans un même répertoire.
 - Ouvrir le fichier init et choisir les paramètres voulus, sauvegarder.
-- Ouvrir le terminal; se placer dans la répertoire contenant les fichiers du dossier et taper 'python3 init.py' 
+- Ouvrir le terminal; se placer dans la répertoire contenant les fichiers du dossier et taper 'python3 init.py' pour lancer le calcul
+- Pour modifier les paramètres de calcul, ouvrir le fichier 'init.py' puis changer les paramètres utilisés.
+
 
 Le fichier documentation.pdf présente la démarche suivie, ainsi que des exemples de calcul.
 
