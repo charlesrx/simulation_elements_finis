@@ -120,9 +120,9 @@ b=np.zeros(2*(N+1)*(NN+1))
 # for i in range(1,NN+2):
 # 	b[(N+1)*(NN+1)+(N+1)*i-1]=-8e4*N/2
 
-#On ajoute une force verticale de 4e4*horizontal Newton vers le bas 
-#au coin supérieur droit.
-b[(N+1)*(NN+1)+N+1-1]=-4e4*L
+#On ajoute une force verticale de 4e7*horizontal Newton vers le bas 
+#au coin supérieur droit divisé par une épaisseur de 100 m ce qui donne 4e5N.
+b[(N+1)*(NN+1)+N+1-1]=-4e5
 
 #On veut maintenant imposer des conditions de dirichlet au côté gauche
 #Comme les conditions imposée au bord sont nulles il n'y a pas besoin de
